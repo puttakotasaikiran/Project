@@ -1,0 +1,66 @@
+<h3 style="text-align:center">All Comment records</h3>
+<div class="alert alert-success" *ngIf="msg !=undefined"> {{msg}}</div>
+<div class="alert alert-danger" *ngIf="errorMsg != undefined" [innerHTML]="errorMsg">{{errorMsg}}</div>
+
+<div *ngIf='!isUpdate'>
+    
+<table class="table table-info table-striped table-hover col-md-8 mx-auto mt-3">
+    <tr>
+        <th>USER ID</th>
+        <th>NAME</th>
+        <th>SONG ID</th>
+        <th>COMMENTS</th>
+        <th>EMAIL</th>
+
+    </tr>
+    <tr *ngFor="let emp of employee">
+        <td>{{emp.id}}</td>
+        <td>{{emp.name }}</td>
+        <td>{{emp.lastName}}</td>
+        <td>{{emp.designation}}</td>
+        <td>{{emp.email}}</td>
+        <td> <input type="button" class="btn btn-success" value='Update' (click)='viewUpdateEmployee(emp)'/></td>
+        <td> <input type="button" class="btn btn-danger" value='Delete' (click)='deleteEmployee(emp.id)' /></td>
+    </tr>
+</table>
+</div>
+
+<div *ngIf='isUpdate'>
+
+    <form #AddEmpForm="ngForm" (ngSubmit)="updateEmployee()">
+        <div >User ID </div>
+        <div ><input type="number" disabled name="empid" [(ngModel)]="updateEmp.id" required #empId="ngModel" class="form-control"/>  </div>
+        <div class="alert alert-danger" *ngIf="empId.invalid && empId.touched" >User Id required.</div>
+        <div > Name </div>
+        <div ><input type="text" name="empname" [(ngModel)]="updateEmp.name" required #empName="ngModel" class="form-control"/>  </div>
+        <div class="alert alert-danger" *ngIf="empName.invalid && empName.touched" >User Name required.</div>
+        <div >Song Id</div>
+        <div ><input type="text" name="emplname" [(ngModel)]="updateEmp.lastName" required #empLastname="ngModel" class="form-control"/>  </div>
+        <div class="alert alert-danger" *ngIf="empLastname.invalid && empLastname.touched" >Song ID is required.</div>
+        
+        <div >Comments </div>
+        <div ><input type="text" name="empdesi" [(ngModel)]="updateEmp.designation" required #empDesignation="ngModel" class="form-control"/>  </div>
+        <div class="alert alert-danger" *ngIf="empDesignation.invalid && empDesignation.touched" >Add your comments</div>
+        
+        <div >User Email </div>
+    <div ><input type="text" name="empemail" [(ngModel)]="employee.email" required #empEmail="ngModel" class="form-control"/>  </div>
+    <div class="alert alert-danger" *ngIf="empEmail.invalid && empEmail.touched" >User Email is required.</div>
+        
+        <div> <input type="submit" [disabled]="!AddEmpForm.valid" class="btn btn-success" value="Update"/> </div>
+        
+    
+    </form>
+
+</div>
+<div *ngIf='!isDelete'>
+
+<form #AddEmpForm="ngForm" (ngSubmit)="deleteEmployee()">
+    
+    <button ng-click="Delete" ng-confirm-click="Are you sure to delete an Employee record"></button>
+    
+    
+    
+
+</form>
+
+</div>

@@ -1,0 +1,28 @@
+<h3>Add another comments's record!</h3>
+
+<div class="alert alert-success" *ngIf="msg !=undefined"> {{msg}}</div>
+<div class="alert alert-danger" *ngIf="errorMsg != undefined" [innerHTML]="errorMsg">{{errorMsg}}</div>
+
+<form #AddEmpForm="ngForm" (ngSubmit)="addEmployee()">
+    <div >User ID </div>
+    <div ><input type="number" name="empid" [(ngModel)]="employee.id" required #empId="ngModel" class="form-control"/>  </div>
+    <div class="alert alert-danger" *ngIf="empId.invalid && empId.touched" >User Id required.</div>
+    <div >Name </div>
+    <div ><input type="text" name="empname" [(ngModel)]="employee.name" required #empName="ngModel" class="form-control"/>  </div>
+    <div class="alert alert-danger" *ngIf="empName.invalid && empName.touched" >User Name required.</div>
+    <div >Song Id </div>
+    <div ><input type="text" name="emplname" [(ngModel)]="employee.lastName" required #empLastname="ngModel" class="form-control"/>  </div>
+    <div class="alert alert-danger" *ngIf="empLastname.invalid && empLastname.touched" >Song Id required.</div>
+    
+    <div >Comments </div>
+    <div ><input type="text" name="empdesi" [(ngModel)]="employee.designation" required #empDesignation="ngModel" class="form-control"/>  </div>
+    <div class="alert alert-danger" *ngIf="empDesignation.invalid && empDesignation.touched" >Add your comments</div>
+    
+    <div >User Email </div>
+    <div ><input type="text" name="empemail" [(ngModel)]="employee.email" required #empEmail="ngModel" class="form-control"/>  </div>
+    <div class="alert alert-danger" *ngIf="empEmail.invalid && empEmail.touched" >User Email is required.</div>
+    
+   <div> <input type="submit" [disabled]="!AddEmpForm.valid" class="btn btn-success" /> </div> 
+    
+
+</form>
